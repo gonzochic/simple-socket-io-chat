@@ -72,6 +72,14 @@ module.exports = function (socket) {
     });
   });
 
+  // display when somebody is typing
+  socket.on('user:typing', function (isTyping) {
+    socket.broadcast.emit('user:typing', {
+      name: name,
+      isTyping: isTyping
+    });
+  })
+
   // validate a user's name change, and broadcast it on success
   socket.on('change:name', function (data, fn) {
     console.log('change name');
